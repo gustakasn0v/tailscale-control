@@ -1,4 +1,4 @@
-import { ServerAPI } from "decky-frontend-lib"
+import {ServerAPI, ServerResponse} from "decky-frontend-lib"
 
 var server: ServerAPI | undefined = undefined;
 
@@ -22,4 +22,8 @@ export function setServer(s: ServerAPI) {
 
 export function getTailscaleState(): Promise<any> {
     return server!.callPluginMethod("get_tailscale_state", {});
+}
+
+export function getTailscaleDevices(): Promise<ServerResponse<string>> {
+    return server!.callPluginMethod<{},string>("get_tailscale_devices", {});
 }
